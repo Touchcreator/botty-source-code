@@ -45,7 +45,7 @@ def get_word():
 def get_cat():
   catresponse = requests.get("http://aws.random.cat/meow")
   json_data = json.loads(catresponse.text)
-  dacutie = json_data[0]
+  dacutie = json_data[0]["file"]
   return(dacutie)
 
 
