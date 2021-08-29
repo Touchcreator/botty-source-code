@@ -7,14 +7,8 @@ from keep_repl_alive import keep_alive
 
 
 
-client = discord.Client()
-
-prefix = "b!"
-
-client = commands.Bot(command_prefix = prefix)#Makes the bot prefix.
-client.remove_command('help')#Removes the auto help command as it can be buggy.
-
-keep_alive()
+client = commands.Bot(command_prefix = 'b!', case_insensitive = True)
+client.remove_command('help')
 
 def get_quote():
   response = requests.get('https://zenquotes.io/api/random')
@@ -42,11 +36,11 @@ def get_word():
   randoword = json_data[0]
   return(randoword)
 
-#def get_cat():
-  #catresponse = requests.get("http://aws.random.cat/meow")
-  #json_data = json.loads(catresponse.text)
-  #randocat = json_data[0]["file"]
-  #return(randocat)
+def get_cat():
+  catresponse = requests.get("http://aws.random.cat/meow")
+  json_data = json.loads(catresponse.text)
+  randocat = json_data[0]["file"]
+  return(randocat)
 
 
 @client.event
@@ -104,12 +98,18 @@ async def word(ctx):
 
 @client.command()
 async def catpic(ctx):
-  await ctx.send("the doctors cant seem to find touch's brain, so thats why they couldnt make this command")
+  #embed = discord.Embed(
+    #title = 'Here is a cat picture :cat:'
+  #)
+  #embed.set_image(get_cat())
+  #await ctx.send(embed=embed)
+  await ctx.send("amogus *coding in cat pics is too hard :(*")
 
 @client.command()
 async def ping(ctx):
     await ctx.send(f"Pong! :ping_pong:{round(client.latency)} ms")
-    print(client.latency)
+    print(f"{client.latency} ms")
 
 
+keep_alive()
 client.run(os.getenv('TOKEN'))
