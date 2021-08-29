@@ -46,6 +46,7 @@ def get_cat():
   catresponse = requests.get("http://aws.random.cat/meow")
   json_data = json.loads(catresponse.text)
   dacutie = json_data[0]["file"]
+  print(json_data[0]["file"])
   return(dacutie)
 
 
@@ -104,7 +105,7 @@ async def word(ctx):
 
 @client.command()
 async def catpic(ctx):
-  await ctx.send()
+  await ctx.send(get_cat())
 
 
 client.run(os.getenv('TOKEN'))
