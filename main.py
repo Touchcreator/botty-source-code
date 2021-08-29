@@ -36,6 +36,18 @@ def get_definition(word):
   definition = embed
   return definition
 
+def get_word():
+  responsew = requests.get('https://random-word-api.herokuapp.com/word?number=1')
+  json_data = json.loads(responsew.text)
+  randoword = json_data[0]
+  return(randoword)
+
+def get_cat():
+  catresponse = requests.get("http://aws.random.cat/meow")
+  json_data = json.loads(catresponse.text)
+  dacutie = json_data[0]
+  return(dacutie)
+
 
 @client.event
 async def on_ready():
@@ -85,6 +97,14 @@ async def unban(ctx, *, member):
     await ctx.guild.unban(user)
     await ctx.send(f"{user} have been unbanned sucessfully")
     return
+
+@client.command()
+async def word(ctx):
+  await ctx.send(get_word())
+
+@client.command()
+async def catpic(ctx):
+  await ctx.send()
 
 
 client.run(os.getenv('TOKEN'))
