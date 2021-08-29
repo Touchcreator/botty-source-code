@@ -42,12 +42,11 @@ def get_word():
   randoword = json_data[0]
   return(randoword)
 
-def get_cat():
-  catresponse = requests.get("http://aws.random.cat/meow")
-  json_data = json.loads(catresponse.text)
-  dacutie = json_data[0]["file"]
-  print(json_data[0]["file"])
-  return(dacutie)
+#def get_cat():
+  #catresponse = requests.get("http://aws.random.cat/meow")
+  #json_data = json.loads(catresponse.text)
+  #randocat = json_data[0]["file"]
+  #return(randocat)
 
 
 @client.event
@@ -105,7 +104,12 @@ async def word(ctx):
 
 @client.command()
 async def catpic(ctx):
-  await ctx.send(get_cat())
+  await ctx.send("the doctors cant seem to find touch's brain, so thats why they couldnt make this command")
+
+@client.command()
+async def ping(ctx):
+    await ctx.send(f"Pong! :ping_pong:{round(client.latency)} ms")
+    print(client.latency)
 
 
 client.run(os.getenv('TOKEN'))
